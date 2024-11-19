@@ -37,6 +37,11 @@ public class UserPackageService {
 		return userPackageRepository.save(userPackage);
 	}
 	
+	public UserPackage updateBalanceCredits(UserPackage userPackage, Integer newBalanceCredits) {
+		userPackage.setBalanceCredits(newBalanceCredits);
+		return userPackageRepository.save(userPackage);
+	}
+	
 	public void removeUserPackage(Integer userPackageId) {
 		userPackageRepository.deleteById(userPackageId);
 	}
@@ -51,4 +56,12 @@ public class UserPackageService {
             return false;
         }
     }
+	
+	private boolean checkCredits(Integer balanceCredits, Integer fitnessClassCredits) {
+		if (balanceCredits - fitnessClassCredits >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
