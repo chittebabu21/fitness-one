@@ -42,10 +42,6 @@ public class User {
 	@Column(name = "created_on", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private String createdOn;
 
-//	public void setPasswordHash(String passwordHash) {
-//		this.passwordHash = passwordHash;
-//	}
-
     // method to format timestamp object
     @PrePersist
     private void setCreatedOn() {

@@ -71,10 +71,6 @@ public class UserController {
 	public String login(@RequestBody User user) {
 		User existingUser = userService.findUserByEmailAddress(user.getEmailAddress());
 		boolean validatedPassword = userService.validatePassword(user.getPasswordHash(), existingUser.getPasswordHash());
-		System.out.println(user.getPasswordHash());
-		System.out.println(existingUser.getPasswordHash());
-		System.out.println(existingUser);
-		System.out.println(validatedPassword);
 		
 		long expirationTime = 3600000;
 		
@@ -88,7 +84,6 @@ public class UserController {
 					.signWith(getSignInKey(), SignatureAlgorithm.HS256)
 					.compact();
 			
-			existingUser.setToken(token);
 			userService.updateToken(existingUser, token);
 			return token;
 		} else {
