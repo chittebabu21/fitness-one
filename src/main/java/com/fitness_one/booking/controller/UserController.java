@@ -5,9 +5,14 @@ package com.fitness_one.booking.controller;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,8 +68,20 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public User createUser(@RequestBody User user) {
-		return userService.saveUser(user);
+	public ResponseEntity<Object> createUser(@RequestBody User user) {
+		boolean validEmailAddress = this.sendVerifyEmail(user.getEmailAddress());
+		
+		if (validEmailAddress) {
+			User newUser = userService.saveUser(user);
+			
+			Map<String, Object> response = new HashMap<>();
+			response.put("message", "User added successfully!");
+			response.put("user", newUser);
+			
+			return ResponseEntity.ok(response);
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add user.");
+		}
 	}
 	
 	@PostMapping("/login")
@@ -126,6 +143,11 @@ public class UserController {
 		}
 		
 		userService.removeUser(userId);
+	}
+	
+	// send verify email dummy method
+	public boolean sendVerifyEmail(String emailAddress) {
+		return true;
 	}
 
     private Key getSignInKey() {
