@@ -6,9 +6,6 @@ package com.fitness_one.booking.controller;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fitness_one.booking.model.User;
 import com.fitness_one.booking.service.UserService;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
