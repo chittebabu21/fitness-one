@@ -40,6 +40,11 @@ public class FitnessClassService {
 			return fitnessClassRepository.save(newFitnessClass);
 		}
 		
+		public FitnessClass updateSlotsAvailable(FitnessClass fitnessClass, Integer slotsAvailable) {
+			fitnessClass.setSlotsAvailable(slotsAvailable);
+			return fitnessClassRepository.save(fitnessClass);
+		}
+		
 		public void removeFitnessClass(Integer fitnessClassId) {
 			fitnessClassRepository.deleteById(fitnessClassId);
 		}

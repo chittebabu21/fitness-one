@@ -4,6 +4,7 @@
 package com.fitness_one.booking.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,10 @@ public class UserPackageService {
 	
 	public UserPackage findUserPackageById(Integer userPackageId) {
 		return userPackageRepository.findById(userPackageId).orElse(null);
+	}
+	
+	public Optional<UserPackage> findUserPackageByUserId(Integer userId) {
+		return userPackageRepository.findUserPackageByUser_UserId(userId);
 	}
 	
 	public UserPackage saveUserPackage(UserPackage userPackage) {
